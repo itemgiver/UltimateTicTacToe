@@ -1,5 +1,7 @@
 # UltimateTicTacToe
 
+<img src="https://user-images.githubusercontent.com/87184009/127621048-b53e4a5f-e9f4-43cf-9856-badf813a333d.png" alt="drawing" width="400"/>
+
 ## 문제발견(동기 및 필요성)
 AlphaGo Zero의 원리는 바둑뿐만 아니라 다른 완전정보게임에서도 쓸 수 있는 알고리즘이지만 현재 AlphaGo Zero의 원리를 다른 게임에서 시도해본 연구는 거의 없음. 게임 트리 복잡도가 10^50 정도인 완전정보게임 Ultiate Tic Tac Toe는 아직 풀리지 않은 게임이었고 AlphaGo Zero의 원리를 적용해 이 게임의 근사 최적해를 구해보고자 함.
 
