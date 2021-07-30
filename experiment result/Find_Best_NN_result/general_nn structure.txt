@@ -1,0 +1,14 @@
+feature extract
+(41*9)로 구성, 32 = 9 + 3*8 + 8
+
+(41*9)와 연결된 x*9로 구성,
+50은 그냥 생성한 숫자(hidden layer)
+minmaxrelu (20) 하기
+
+((9+x)*9)와 연결된 y*9로 구성
+sigmoid하기
+
+y*9와 최종 81개와 fully connect
+sigmoid 하기
+
+학습은 dropout방식으로 하자.

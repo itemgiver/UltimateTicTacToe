@@ -1,0 +1,7 @@
+fightnn 설명
+각 줄에 6개의 숫자가 있는데
+(번호, 무승부, 선공 win, 선공 lose, 후공 win, 후공 lose)를 뜻함
+
+I selected
+x = 50, y = 35, no normalize_nn_input(), regularization = 0.0001
+NN network.
