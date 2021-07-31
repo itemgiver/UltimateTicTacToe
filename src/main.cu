@@ -1,4 +1,4 @@
-// ÄÚµå ½ÇÇà½ÃÅ°±â Àü¿¡ M*MAX_batch_size °°Àº°Ô int ¹üÀ§ ¾È ³Ñ´ÂÁö ¹İµå½Ã È®ÀÎÇØº¸ÀÚ.
+// ì½”ë“œ ì‹¤í–‰ì‹œí‚¤ê¸° ì „ì— M*MAX_batch_size ê°™ì€ê²Œ int ë²”ìœ„ ì•ˆ ë„˜ëŠ”ì§€ ë°˜ë“œì‹œ í™•ì¸í•´ë³´ì.
 #include <random>
 #include <algorithm>
 #include <queue>
@@ -181,7 +181,7 @@ __global__ void gpu_update_lr(int *dev_lr_support,double *dev_lr){
 	dev_lr[offset] = (double)learning_rate*sqrt((double)1 - pow(beta2, dev_lr_support[offset])) / ((double)1 - pow(beta1, dev_lr_support[offset]));
 }
 
-// block = (1246,6947), thread = batch_size/2°¡ µÇ¾î¾ß ÇÏÁö¸¸ ÀÌÀ¯¸ğ¸¦ ¹ö±×¸¦ °íÄ¡±â À§ÇØ ÀÏ´ÜÀº batch_size·Î
+// block = (1246,6947), thread = batch_size/2ê°€ ë˜ì–´ì•¼ í•˜ì§€ë§Œ ì´ìœ ëª¨ë¥¼ ë²„ê·¸ë¥¼ ê³ ì¹˜ê¸° ìœ„í•´ ì¼ë‹¨ì€ batch_sizeë¡œ
 __global__ void gpu_copy_weight(double *dev_weight){
 	int i;
 	int threadIdxx = threadIdx.x;
@@ -198,7 +198,7 @@ __global__ void gpu_copy_weight(double *dev_weight){
 	}
 }
 
-// block = batch_size, thread = 162 , dev_rawdata = (0~80) ÀÌ ¹İº¹µÇ´Â ÇüÅÂ·Î ±¸¼ºµÇ¾îÀÖ¾î¾ß ÇÔ.
+// block = batch_size, thread = 162 , dev_rawdata = (0~80) ì´ ë°˜ë³µë˜ëŠ” í˜•íƒœë¡œ êµ¬ì„±ë˜ì–´ìˆì–´ì•¼ í•¨.
 __global__ void gpu_run1(int *dev_rawdata,double *dev_node){
 	int i;
 	int blockidxx = blockIdx.x;
@@ -588,9 +588,9 @@ __global__ void gpu_backpropagation1(double *dev_nn_node,double *dev_delta,doubl
 	int offset = 9379+blockIdxy+blockidxx*N;
 	double dev_answer = dev_policy_answer[blockIdxy+blockidxx*81];
 
-	if(dev_answer == 2){ // answer = 2 = update ¾ÈÇÏ´Â°É·Î
+	if(dev_answer == 2){ // answer = 2 = update ì•ˆí•˜ëŠ”ê±¸ë¡œ
 		dev_delta[offset] = 0;
-	}else{ // ¾Æ·¡ ½ÄÀÌ ¸Â³ª ¸ğ¸£°Ú´Ù
+	}else{ // ì•„ë˜ ì‹ì´ ë§ë‚˜ ëª¨ë¥´ê² ë‹¤
 		if(dev_answer == 0) dev_delta[offset] = dev_nn_node[offset];
 		else dev_delta[offset] = -(double)((double)1-dev_nn_node[offset]);
 	}
@@ -604,7 +604,7 @@ __global__ void gpu_backpropagation2(double *dev_nn_node,double *dev_delta,doubl
 
 	if(dev_value_answer[blockIdxy+blockidxx*9] == 2){
 		dev_delta[offset] = 0;
-	}else{ // ¾Æ·¡ ½ÄÀÌ ¸Â³ª ¸ğ¸£°Ú´Ù
+	}else{ // ì•„ë˜ ì‹ì´ ë§ë‚˜ ëª¨ë¥´ê² ë‹¤
 		dev_delta[offset] = (double)2*(dev_nn_node[offset]-dev_value_answer[blockIdxy+blockidxx*9]);
 		dev_delta[offset] *= ((double)1-(dev_nn_node[offset]*dev_nn_node[offset]));
 	}
@@ -712,7 +712,7 @@ __global__ void gpu_backpropagation6(double *dev_nn_node,double *dev_delta,doubl
 	if(threadIdxx == 0){
 		int offset = 6307+blockIdxy+blockidxx*N;
 		
-		dev_delta[offset] += sum[0]; // ¿©±â¸¸ += À¸·Î ÇÔ
+		dev_delta[offset] += sum[0]; // ì—¬ê¸°ë§Œ += ìœ¼ë¡œ í•¨
 		if(dev_nn_node[offset] > 0) dev_delta[offset] *= lambda;
 		else dev_delta[offset] *= (dev_nn_node[offset]+alphalambda);
 	}
@@ -1455,15 +1455,15 @@ public:
 			for (unsigned int j = 0; j != 9; ++j)
 			{
 				if (j && (j % 3 == 0))
-					printf("|¡Ë");
+					printf("|ï¿ ");
 				unsigned int A = (i / 3) * 3 + (j / 3);
 				unsigned int B = (i % 3) * 3 + (j % 3);
 				if (bb[1][9] & (1 << A))
-					printf("¡ÌI ");
+					printf("ï¿¡I ");
 				else if ((bb[0][9] & (1 << A)) || (bb[0][A] & (1 << B)))
-					printf("¡Ì¨ª");
+					printf("ï¿¡Ã˜");
 				else if (bb[1][A] & (1 << B))
-					printf("¡ÌI ");
+					printf("ï¿¡I ");
 				else printf("   ");
 			}
 			puts("");
@@ -1476,23 +1476,23 @@ public:
 		puts("");
 		if (pb == 9)
 		{
-			puts("¢®a|¡Ë¢®a|¡Ë¢®a");
-			puts("|¢®|¢®|¡ì|¢®|¢®|¡ì|¢®|¢®");
-			puts("¢®a|¡Ë¢®a|¡Ë¢®a");
-			puts("|¢®|¢®|¡ì|¢®|¢®|¡ì|¢®|¢®");
-			puts("¢®a|¡Ë¢®a|¡Ë¢®a");
+			puts("Â¡a|ï¿ Â¡a|ï¿ Â¡a");
+			puts("|Â¡|Â¡|â‰ª|Â¡|Â¡|â‰ª|Â¡|Â¡");
+			puts("Â¡a|ï¿ Â¡a|ï¿ Â¡a");
+			puts("|Â¡|Â¡|â‰ª|Â¡|Â¡|â‰ª|Â¡|Â¡");
+			puts("Â¡a|ï¿ Â¡a|ï¿ Â¡a");
 		}
 		else
 		{
 			for (unsigned int i = 0; i != 3; ++i)
 			{
 				if (i)
-					puts("|¢®|¢®|¡ì|¢®|¢®|¡ì|¢®|¢®");
+					puts("|Â¡|Â¡|â‰ª|Â¡|Â¡|â‰ª|Â¡|Â¡");
 				for (unsigned int j = 0; j != 3; ++j)
 				{
-					if (j)printf("|¡Ë");
+					if (j)printf("|ï¿ ");
 					if (i * 3 + j == pb)
-						printf("¢®a");
+						printf("Â¡a");
 					else printf("  ");
 				}
 				puts("");
@@ -1624,7 +1624,7 @@ public:
 			if (search_data[0].child_index_end == 2) break;
 		} while (--trials);
 	}
-	int search_within_time(double second, float DRAW_REWARD) // ¾à°£ÀÇ °á°ú Á¶ÀÛ µé¾î°¨ ½Ã°£ÀÌ ±Ş¹ÚÇØ¼­ gpu_timeÀÌ¶ó´Â º¯¼ö¸¦ Ãß°¡ÇÔ.
+	int search_within_time(double second, float DRAW_REWARD) // gpu_timeì´ë¼ëŠ” ë³€ìˆ˜ë¥¼ ì¶”ê°€í•¨.
 	{
 		int num_simul = 0;
 		clock_t end = clock() + second * CLOCKS_PER_SEC;
@@ -1706,7 +1706,7 @@ public:
 		}
 		unsigned int node_to_search = search_data[index].child_index_start;
 		float max_UCT = UCT(search_data[index].child_index_start, search_data[index].num_simul);
-		// max °ª Ã£±â¸¦ ¹öºíÁ¤·Ä ÀÀ¿ëÇÏ¸é ´õ È¿À²ÀûÀ¸·Î °¡´ÉÇÒµí.
+		// max ê°’ ì°¾ê¸°ë¥¼ ë²„ë¸”ì •ë ¬ ì‘ìš©í•˜ë©´ ë” íš¨ìœ¨ì ìœ¼ë¡œ ê°€ëŠ¥í• ë“¯.
 		for (unsigned int i = search_data[index].child_index_start + 1; i != search_data[index].child_index_end; ++i)
 		{
 			float temp = UCT(i, search_data[index].num_simul);
@@ -1841,7 +1841,7 @@ void all_run(){
 			
 			int make_mcts_node,mcts_search_num;
 			if (false) {
-				// nn ¼±°ø. mcts ÈÄ°ø
+				// nn ì„ ê³µ. mcts í›„ê³µ
 				if ((x.gett() ^ t) == 0) {
 					a.change_use_nn(true);
 					clock_t tmp = clock();
@@ -1860,7 +1860,7 @@ void all_run(){
 				}
 			}
 			else if (false) {
-				// nn ÈÄ°ø, mcts ¼±°ø
+				// nn í›„ê³µ, mcts ì„ ê³µ
 				if ((x.gett() ^ t) == 0) {
 					a.change_use_nn(false);
 					clock_t begin = clock();
@@ -1878,7 +1878,7 @@ void all_run(){
 				}
 			}
 			else {
-				// nn ¼±°ø, nn ÈÄ°ø
+				// nn ì„ ê³µ, nn í›„ê³µ
 				int simulation_nn = simulation_mcts;
 				a.change_use_nn(true);
 				a.search(simulation_nn, 0);
@@ -1944,10 +1944,10 @@ int main()
 	puts("finish");
 
 	/*nn_num = 0;
-	cut_lev = 6; // cut_lev = mcts tree¿¡¼­ node levÀÌ cut_levº¸´Ù ÀÛÀ» ¶§¸¸ gpu_nn_generateÇÔ. ½Ã°£¶§¹®¿¡ ÀÌ·¸°Ô ¼³Á¤ÇÔ. value network »ç¿ëÇÏ¸é ÇØ°áµÉ¼ù;¤Ç.
+	cut_lev = 6; // cut_lev = mcts treeì—ì„œ node levì´ cut_levë³´ë‹¤ ì‘ì„ ë•Œë§Œ gpu_nn_generateí•¨. ì‹œê°„ë•Œë¬¸ì— ì´ë ‡ê²Œ ì„¤ì •í•¨. value network ì‚¬ìš©í•˜ë©´ í•´ê²°ë ìˆŸ;ã…—.
 	cutting = 0.05;
 	simulation_mcts = 1500000;
-	cpu_cnt = 36; // 48°³Áö¸¸ Çù»óÀ» ÅëÇÑ °á°ú·Î 36°³ ¹è´ç¹ŞÀ½.
+	cpu_cnt = 36; // 48ê°œì§€ë§Œ í˜‘ìƒì„ í†µí•œ ê²°ê³¼ë¡œ 36ê°œ ë°°ë‹¹ë°›ìŒ.
 
 	//run_cuda();
 	srand((unsigned int)time(NULL));
