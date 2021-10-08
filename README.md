@@ -8,7 +8,12 @@
 
 ## Game-AI Strategy
 
+MCTS : Monte-Carlo-Tree-Search with 15,000,000 searches per each decision. (takes about 9 sec)\
+My Game-AI : Reduce the number of search cases using policy network and value network. Networks are consists of deep neural network with 10 layers. Similar to MCTS, the game-ai thinks about 9 seconds.
 
+## Deep Neural Network
+
+Unlike the game of Go, we cannot use a convolutional neural network in the beginning. There was a need for a method to obtain what input features were needed. I put all the logically possible input features in the neural network and removed input features that degrade performance. Therefore, a total of 162 input features were obtained.
 
 ## Result
 
@@ -20,4 +25,4 @@
 
 ## Other
 
-The study of this project ended in August 2018. This is because satisfactory results came out and it was no longer meaningful to proceed with the project. The project could be implemented using a library such as Tensorflow, but it was implemented in CUDA C because I was curious about the internal structure of the GPU. To practice how neural networks work, I chose the CUDA C programming language. After programming and debugging my code, I was able to improve my understanding of deep neural networks by implementing forwarding, backpropagation, and adam optimizer by myself.
+The study of this project ended in August 2018. This is because satisfactory results came out and it was no longer meaningful to proceed with the project. The project could be implemented using a library such as Tensorflow, but it was implemented in CUDA C because I was curious about the internal structure of the GPU. To practice how neural networks work in GPU, I chose the CUDA C programming language. After programming and debugging my code, I was able to improve my understanding of deep neural networks by implementing forwarding, backpropagation, and adam optimizer by myself.
