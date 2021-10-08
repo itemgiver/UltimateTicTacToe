@@ -4,6 +4,10 @@
 
 ## Abstract
 
-## Result
+## MCTS VS. MCTS Result
 
-![image](https://user-images.githubusercontent.com/87184009/136500984-fd384712-712b-4656-890e-ebe004a0261c.png)
+![image](https://user-images.githubusercontent.com/87184009/136501490-4814f93a-cb7f-4a31-9263-426359f6263f.png)
+
+## My Game-AI VS. MCTS Result
+
+![image](https://user-images.githubusercontent.com/87184009/136501334-9d6464fe-46d1-4bb5-af85-f31aef0de8aa.png)
