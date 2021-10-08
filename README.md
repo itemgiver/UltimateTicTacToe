@@ -8,12 +8,12 @@
 
 ## Game-AI Strategy
 
-MCTS : Monte-Carlo-Tree-Search with 15,000,000 searches per each decision. (takes about 9 sec)\
+MCTS : Monte Carlo Tree Search with 15,000,000 searches per each decision. (takes about 9 sec)\
 My Game-AI : Reduce the number of search cases using policy network and value network. Networks are consists of deep neural network with 12 layers. Similar to MCTS, the game-ai thinks about 9 seconds.
 
 ## Deep Neural Network
 
-Unlike the game of Go, we cannot use a convolutional neural network in the beginning. There was a need for a method to obtain what input features were needed. I put all the logically possible input features in the neural network and removed input features that degrade performance. Therefore, a total of 162 input features were obtained.
+Unlike the game of Go, we cannot use a convolutional neural network in the beginning. We need to find a method to figure out which input features to choose. I put all the logically possible input features in the neural network and removed some of the input features that degrade performance. Therefore, a total of 162 input features were obtained. All neural network layers are fully connected with the previous layer. Except for the last layer, all of them used the ReLU activation function. The last layer consists of nine policy network outputs and one value network output. These values are used in pruning the Monte Carlo tree to reduce the number of search cases.
 
 ![image](https://user-images.githubusercontent.com/87184009/136514436-cc29251f-cd42-48cc-8fae-f45bba9f6d68.png)
 
