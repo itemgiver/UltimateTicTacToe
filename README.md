@@ -6,7 +6,7 @@
 
 ## MCTS VS. MCTS Result
 
-![image](https://user-images.githubusercontent.com/87184009/136501490-4814f93a-cb7f-4a31-9263-426359f6263f.png)
+![image](https://user-images.githubusercontent.com/87184009/136501708-10c99107-2c81-4dae-8e3a-781a5347589e.png)
 
 ## My Game-AI VS. MCTS Result
 
