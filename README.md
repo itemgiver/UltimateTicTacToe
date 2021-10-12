@@ -19,7 +19,7 @@ My Game-AI : Reduce the number of search cases using policy network and value ne
 
 ## Result
 
-When MCTS play games together, there are many draws. Increasing the number of searches in MCTS did not significantly change the winning rate. It means that we need to apply a better algorithm not just increasing the number of searches to win against MCTS. My game-ai applied AlphaGo's algorithm successfully and beats MCTS at a high winning rate.
+When MCTS play games together, there are many draws. Increasing the number of searches in MCTS did not significantly change the winning rate. It means that we need to apply a better algorithm not just increasing the number of searches to win against MCTS. My game-ai used AlphaGo's algorithm to beat MCTS. I trained my game-ai by reinforcement learning in a way that to win more. As a result, I could see my game-ai beating the opponent with a 70% and 52% chance.
 
 ![image](https://user-images.githubusercontent.com/87184009/136501708-10c99107-2c81-4dae-8e3a-781a5347589e.png)
 
