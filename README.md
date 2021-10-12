@@ -37,7 +37,3 @@ You can run the code using main.cc and weights00.txt in the src folder. However,
 ## Other
 
 The study of this project ended in August 2018. This is because satisfactory results came out and it was no longer meaningful to proceed with the project. The project could be implemented using a library such as Tensorflow, but it was implemented in CUDA C. I chose the CUDA C programming language to practice how neural networks work in GPU. After programming and debugging my code, I improved my understanding of deep neural networks by implementing forwarding, backpropagation, and adam optimizer.
-
-## References
-
-https://en.wikipedia.org/wiki/Ultimate_tic-tac-toe
